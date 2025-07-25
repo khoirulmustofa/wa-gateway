@@ -28,13 +28,27 @@ export const createMessageController = () => {
         });
       }
 
+      // Kirim event "start typing"
       await whatsapp.sendTyping({
         sessionId: payload.session,
         to: payload.to,
-        duration: Math.min(5000, payload.text.length * 100),
+        duration: 10000, // durasi maksimal, bisa diakhiri lebih cepat
         isGroup: payload.is_group,
       });
 
+      // Tunggu antara 2–10 detik secara acak
+      const delay = Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000;
+      await new Promise((resolve) => setTimeout(resolve, delay));
+
+      // Kirim event "stop typing"
+      await whatsapp.sendTyping({
+        sessionId: payload.session,
+        to: payload.to,
+        duration: 0, // durasi 0 = stop typing
+        isGroup: payload.is_group,
+      });
+
+      // Kirim pesan teks
       const response = await whatsapp.sendTextMessage({
         sessionId: payload.session,
         to: payload.to,
@@ -65,6 +79,27 @@ export const createMessageController = () => {
         });
       }
 
+      // Kirim event "start typing"
+      await whatsapp.sendTyping({
+        sessionId: payload.session,
+        to: payload.to,
+        duration: 10000, // durasi maksimal, bisa diakhiri lebih cepat
+        isGroup: payload.is_group,
+      });
+
+      // Tunggu antara 2–10 detik secara acak
+      const delay = Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000;
+      await new Promise((resolve) => setTimeout(resolve, delay));
+
+      // Kirim event "stop typing"
+      await whatsapp.sendTyping({
+        sessionId: payload.session,
+        to: payload.to,
+        duration: 0, // durasi 0 = stop typing
+        isGroup: payload.is_group,
+      });
+
+      // Kirim pesan teks
       const response = await whatsapp.sendTextMessage({
         sessionId: payload.session,
         to: payload.to,

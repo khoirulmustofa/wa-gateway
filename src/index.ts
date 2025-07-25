@@ -75,7 +75,7 @@ if (env.WEBHOOK_BASE_URL) {
   // message webhook
   whastapp.onMessageReceived(createWebhookMessage(webhookProps));
 
-  // session webhook
+    // session webhook
   const webhookSession = createWebhookSession(webhookProps);
 
   whastapp.onConnected((session) => {
